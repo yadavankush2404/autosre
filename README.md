@@ -121,13 +121,20 @@ python data/setup_vectordb.py
 
 To see **AutoSRE** in action, follow this sequence:
 
-1. **Start the Agent:** `python brain/host_agent.py`
-2. **Start the Service:** `python services/payment_service.py`
-3. **Inject Chaos:** ```bash
+
+1. **Start the Agent** 
+```bash
+python brain/host_agent.py
+```
+2. **Start the Service** 
+```bash
+python services/payment_service.py
+```
+3. **Inject Chaos** 
+```bash
 curl http://localhost:5001/chaos/trigger
 ```
 
-```
 
 
 4. **Observe:** Watch the Agent logs as it detects the 500 error, searches the runbook, and automatically calls the `/fix-pool` endpoint.
