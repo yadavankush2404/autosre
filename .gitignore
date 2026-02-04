@@ -8,6 +8,7 @@ vectorstore
 envapi
 
 
+dump.rdb
 
 .vs/
 .vscode/

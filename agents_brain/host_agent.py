@@ -13,7 +13,7 @@ load_dotenv()
 
 
 # 1. Setup Agent
-llm = ChatGroq(model="llama-3.1-8b-instant", temperature=0)
+llm = ChatGroq(model=os.environ.get("GROQ_MODEL"), temperature=0)
 tools = [search_runbook, execute_remediation]
 
 prompt = ChatPromptTemplate.from_messages([
@@ -26,7 +26,7 @@ agent = create_openai_tools_agent(llm, tools, prompt)
 executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 # 2. Redis Monitor Loop
-r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+r = redis.Redis(host=os.environ.get("REDIS_URL"), port=os.environ.get("REDIS_PORT"), decode_responses=True)
 p = r.pubsub()
 p.subscribe('incidents')
 

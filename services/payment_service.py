@@ -2,9 +2,13 @@ import redis
 import json
 import time
 from flask import Flask, jsonify
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
-r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+r = redis.Redis(host=os.environ.get("REDIS_URL"), port=os.environ.get("REDIS_PORT"), decode_responses=True)
 
 # State variable to simulate a failure
 IS_BROKEN = False
